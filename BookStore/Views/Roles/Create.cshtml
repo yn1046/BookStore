@@ -1,0 +1,15 @@
+﻿@model BookStore.ViewModels.CreateRoleViewModel
+
+<h2>Role creation</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, "")
+        <p>Title:  @Html.EditorFor(model => model.Name)</p>
+        <p>Description: @Html.EditorFor(model => model.Description)</p>
+        <p><input type="submit" value="Add" /></p>
+    </div>
+}

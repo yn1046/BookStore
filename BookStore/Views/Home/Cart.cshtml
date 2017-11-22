@@ -1,0 +1,66 @@
+﻿@{
+    ViewBag.Title = "Cart";
+    Layout = "~/Views/Shared/_Orders.cshtml";
+    var thanks = "Thanks for purchasing the books!";
+    if (User.Identity.IsAuthenticated) { thanks = $"Thanks for purchasing the books, { User.Identity.Name}!"; }
+}
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                <h4 class="modal-title" id="myModalLabel">Thank you!</h4>
+            </div>
+            <div class="modal-body">
+                <p>@thanks</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-block do-submit" data-dismiss="modal">No problem!</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<table class="table .table-hover">
+    <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th></th>
+    </tr>
+
+    @foreach (var book in ViewBag.Purchases)
+    {
+
+        <tr>
+            <td>@book.Name</td>
+            <td>@book.Price</td>
+            <td>
+                @Html.ActionLink("Remove", "RemoveFromCart", new { id = book.Id, returnUrl = "Cart" })
+            </td>
+        </tr>
+    }
+</table>
+@if (ViewBag.Purchases.Count == 0)
+{
+    <p style="font-style:italic; text-align:center">No items in the Cart</p>
+}
+<p style="float:right">
+    <a class="btn btn-info" href="@Url.Action("Order", "Home")">
+        <i class="glyphicon glyphicon-ok"></i> Order
+    </a>
+</p>
+
+@if (ViewBag.invokeModal)
+{
+    @section Scripts {
+
+        <script type="text/JavaScript">
+
+            $(document).ready(function () {
+                $('#myModal').modal('show');
+            });
+
+        </script>
+    }
+}

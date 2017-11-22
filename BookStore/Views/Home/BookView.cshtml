@@ -1,0 +1,74 @@
+﻿@{
+    ViewBag.Title = "Book information";
+    var book = ViewBag.book;
+}
+
+<div class="container body-content">
+    <h1>@book.Name</h1>
+    <h2>By @book.Author</h2>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <img src="~/Content/images/@book.ImgPath" style="max-width:370px" />
+        </div>
+        <div class="col-md-8">
+            <h2>Overview</h2>
+            <p>@book.Overview</p>
+            <h2>Details</h2>
+            <p>Genre: @book.Genre</p>
+            <p>Price: @book.Price</p>
+            <p>Rating: @ViewBag.averageRating</p>
+            @if (!ViewBag.ordered)
+            {
+                <p>
+                    <a class="btn btn-success" href="@Url.Action("AddToCart", "Home", new { id = book.Id, returnUrl = $"BookView/{book.Id}" })">
+                        <i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart
+                    </a>
+                </p>
+            }
+            else
+            {
+                <p>
+                    <a class="btn btn-default" href="@Url.Action("RemoveFromCart", "Home", new { id = book.Id, returnUrl = $"BookView/{book.Id}" })">
+                        <i class="glyphicon glyphicon-ok"></i> Added
+                    </a>
+                </p>
+            }
+        </div>
+    </div>
+    <hr />
+    @if (User.Identity.IsAuthenticated)
+    {
+        <h2>Write a review</h2>
+        <form action="~/Home/AddReview" method="post" style="max-width:600px">
+            <input type="hidden" name="UserName" value="@User.Identity.Name" />
+            <input type="hidden" name="BookId" value="@book.Id" />
+            <textarea name="Text" type="text" placeholder="Review text" class="form-control" rows="5" style="margin-bottom:10px; resize:none"></textarea>
+            <select class="selectpicker" name="Rating" required>
+                <option value="1">1 (Appaling)</option>
+                <option value="2">2 (Bad)</option>
+                <option value="3">3 (Fine)</option>
+                <option value="4" selected>4 (Good)</option>
+                <option value="5">5 (Masterpiece)</option>
+            </select>
+            <button type="submit" class="btn btn-info" style="float:right">Submit</button>
+        </form>
+    }
+    else
+    {
+        <p>To write a review, please, Sign Up.</p>
+        <p>
+            <a class="btn btn-info" href="@Url.Action("SignUp", "Account")">
+                Sign Up Now <i class="glyphicon glyphicon-arrow-right"></i>
+            </a>
+        </p>
+    }
+    @foreach (var review in ViewBag.reviews)
+    {
+        <hr />
+        <h3>@review.UserName <span style="color:lightgrey;">on @review.Date.ToString("dd MMMM yyyy, hh:mm tt", ViewBag.ci)</span></h3>
+        <p>@review.Text</p>
+        <h4>Rating: @review.Rating</h4>
+    }
+</div>
+

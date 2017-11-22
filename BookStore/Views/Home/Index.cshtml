@@ -1,0 +1,59 @@
+﻿@{
+    ViewBag.Title = "Book store";
+}
+
+@if (!User.Identity.IsAuthenticated)
+{
+<div class="join-banner">
+    <h1>The Book Majors</h1>
+    <h3>We are the world's leading online book store with free delivery to almost any country. 
+    Our offers include over one million books, ranging from imperishable classics to newest bestsellers. 
+    You'll undoubtedly find something delightful that fits your taste, whatever your interests are.
+    Join now to get the best of our service!</h3>
+    <br />
+    <p>
+        <a class="btn btn-info" href="@Url.Action("SignUp", "Account")">
+            Sign Up Now <i class="glyphicon glyphicon-arrow-right"></i>
+        </a>
+    </p>
+</div>
+}
+<h2 style="text-align:center;">@ViewBag.Title</h2>
+
+<div class="container body-content">
+    <div class="row">
+        <div class="container col-sm-8">
+            @foreach (var book in ViewBag.Books)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("BookView", "Home", new { id = book.Id })" class="book-link">
+                        <h2>@book.Name</h2>
+                        <img src="~/Content/images/@book.ImgPath" width="150" />
+                    </a>
+
+                    <p><i>@book.Author</i></p>
+                    <p>Price: @book.Price USD</p>
+                    @if (!ViewBag.ordered.Contains(book.Id))
+                    {
+                    <p><a class="btn btn-success" href="@Url.Action("AddToCart", "Home", new { id = book.Id, returnUrl = "Index" })">
+                        <i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart</a></p>
+                    }
+                    else
+                    {
+                    <p><a class="btn btn-default" href="@Url.Action("RemoveFromCart", "Home", new { id = book.Id, returnUrl = "Index" })">
+                        <i class="glyphicon glyphicon-ok"></i> Added</a></p>
+                    }
+                </div>
+            }
+        </div>
+        <div class="col-sm-4">
+            <div class="list-group">
+                <a class="list-group-item list-group-item-action" href="/Home/Index/All">All</a>
+                <a class="list-group-item list-group-item-action" href="/Home/Index/Postmodern"> Postmodern </a>
+                <a class="list-group-item list-group-item-action" href="/Home/Index/Classic">Classic</a>
+                <a class="list-group-item list-group-item-action" href="/Home/Index/Sci-fi">Sci-fi</a>
+                <a class="list-group-item list-group-item-action" href="/Home/Index/Fantasy">Fantasy</a>
+            </div>
+        </div>
+    </div>
+</div>

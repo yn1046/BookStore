@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "Checkout";
+    Layout = "~/Views/Shared/_Orders.cshtml";
+}
+<div>
+    <p>You're about to buy the following books: @ViewBag.names. It will cost you @ViewBag.sum USD.</p>
+    <p>Enter your credentials to proceed.</p>
+    <form action="~/Home/Order" method="post" style="max-width:400px">
+        <input name="Person" type="text" placeholder="Full Name" class="form-control">
+        <input name="Address" type="text" placeholder="Address" class="form-control">
+        <button type="submit" class="btn btn-info" style="margin-top:10px; width:100px; float:left">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,24 @@
+﻿@{
+    ViewBag.Title = "Sign Up";
+}
+
+<div class="login-container">
+    <div id="output"></div>
+    <div class="avatar"></div>
+    <div class="form-box">
+        <form action="~/Account/SignUp" method="post">
+            <input name="Login" type="text" placeholder="Username" class="first-field">
+            <input name="Email" type="text" placeholder="E-mail" class="middle-field">
+            <input name="BirthDate" type="text" onfocus="(this.type='date')" placeholder="Date of birth" class="middle-field">
+            <input name="Password" type="password" placeholder="Password" class="middle-field">
+            <input name="PasswordConfirm" type="password" placeholder="Confirm password" class="last-field">
+            <button class="btn btn-info btn-block do-submit" type="submit">Sign Up</button>
+        </form>
+    </div>
+</div>
+
+<style>
+    body {
+        background: linear-gradient( rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6) ), url(../Content/markup/bg1.jpg) no-repeat center top;
+    }
+</style>

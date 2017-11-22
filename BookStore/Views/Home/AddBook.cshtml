@@ -1,0 +1,15 @@
+﻿@{
+    ViewBag.Title = "Add Book";
+}
+
+<h2 style="margin-left:20px">Add Book</h2>
+
+<form action="~/Home/AddBook" method="post" style="max-width:400px; margin-left:20px">
+    <input name="Name" type="text" placeholder="Book title" class="form-control">
+    <textarea name="Overview" type="text" placeholder="Overview" class="form-control" rows="5"></textarea>
+    <input name="Author" type="text" placeholder="Author" class="form-control">
+    <input name="Genre" type="text" placeholder="Genre" class="form-control">
+    <input name="Price" type="number" placeholder="Price" class="form-control">
+    <input name="ImgPath" type="text" placeholder="Image file path" class="form-control">
+    <button type="submit" class="btn btn-default">Submit</button>
+</form>

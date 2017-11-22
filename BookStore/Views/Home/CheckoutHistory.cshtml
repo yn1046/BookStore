@@ -1,0 +1,28 @@
+﻿
+@{
+    ViewBag.Title = "Checkout History";
+    Layout = "~/Views/Shared/_Orders.cshtml";
+}
+
+<table class="table .table-hover">
+    <tr>
+        <th>Title</th>
+        <th>Price</th>
+        <th>Date</th>
+    </tr>
+
+    @foreach (var item in ViewBag.Purchases)
+    {
+
+        <tr>
+            <td>@item.MyBook.Name</td>
+            <td>@item.MyBook.Price</td>
+            <td>@item.Date</td>
+        </tr>
+    }
+</table>
+@if (ViewBag.Purchases.Count == 0)
+{
+    <p style="font-style:italic; text-align:center">No checkouts were made</p>
+}
+

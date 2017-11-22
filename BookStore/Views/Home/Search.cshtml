@@ -1,0 +1,36 @@
+﻿<h2 style="text-align:center;">@ViewBag.Title</h2>
+
+<div class="container body-content">
+    <div class="row">
+        <div class="container col-sm-12">
+            @foreach (var book in ViewBag.Books)
+            {
+                <div class="col-md-4">
+                    <a href="@Url.Action("BookView", "Home", new { id = book.Id })" class="book-link">
+                        <h2>@book.Name</h2>
+                        <img src="~/Content/images/@book.ImgPath" width="150" />
+                    </a>
+                    <p><i>@book.Author</i></p>
+                    <p>Price: @book.Price USD</p>
+
+                    @if (!ViewBag.ordered.Contains(book.Id))
+                    {
+                        <p>
+                            <a class="btn btn-success" href="@Url.Action("AddToCart", "Home", new { id = book.Id, returnUrl = "Cart" })">
+                                <i class="glyphicon glyphicon-shopping-cart"></i> Add to Cart
+                            </a>
+                        </p>
+                    }
+                    else
+                    {
+                        <p>
+                            <a class="btn btn-default" href="@Url.Action("RemoveFromCart", "Home", new { id = book.Id, returnUrl = "Cart" })">
+                                <i class="glyphicon glyphicon-ok"></i> Added
+                            </a>
+                        </p>
+                    }
+                </div>
+            }
+        </div>
+    </div>
+</div>

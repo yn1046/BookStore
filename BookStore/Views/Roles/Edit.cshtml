@@ -1,0 +1,16 @@
+﻿@model BookStore.ViewModels.EditRoleViewModel
+
+<h2>Edit roles</h2>
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+
+    <div>
+        @Html.ValidationSummary(true, "")
+        @Html.HiddenFor(model => model.Id)
+        <p>Title:  @Html.EditorFor(model => model.Name)</p>
+        <p>Description: @Html.EditorFor(model => model.Description)</p>
+        <p><input type="submit" value="Apply" /></p>
+    </div>
+}

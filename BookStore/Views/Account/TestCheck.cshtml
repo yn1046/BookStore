@@ -1,0 +1,14 @@
+﻿
+@{
+    ViewBag.Title = "TestCheck";
+}
+
+<h2>TestCheck</h2>
+
+@foreach (var pidr in ViewBag.Pidors)
+{
+    <h1>@pidr.Id</h1>
+    <p>@pidr.UserName</p>
+    <p>@pidr.PasswordHash</p>
+    <p>@pidr.Email</p>
+}
